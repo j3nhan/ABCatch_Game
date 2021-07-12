@@ -15,7 +15,7 @@ In addition, this project will include:
 
 ---
 ## Wireframes
-![wireframes](wireframes_img/wireframe_game.png)
+![wireframes](/wireframes_img/wireframe.png)
 
 ---
 ## Technologies, Libraries, APIs
