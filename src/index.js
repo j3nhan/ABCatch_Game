@@ -4,7 +4,7 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const showScore = document.querySelector('#score');
+    // const showScore = document.querySelector('#score');
 
     let leftMove = false;
     let rightMove = false;
@@ -13,6 +13,7 @@
     let lives = 3;
     let gameOver = true;
 
+    // arrows
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
 
@@ -43,10 +44,11 @@
         }
     }
 
+    // player
     const player = {
-        size: 60,
-        x: Math.floor(canvas.width - 50) / 2,
-        y: Math.floor(canvas.height -50),
+        size: 180,
+        x: Math.floor(canvas.width - 180) / 2,
+        y: Math.floor(canvas.height - 80),
         color: "red"
     }
 
@@ -66,6 +68,35 @@
         }
     }
 
+    
+    // collectable
+    let collect = {
+        x: [],
+        y: [],
+        speed: 2,
+        color: ["green"],
+        state: []
+    };
+
+    let greenNum = 0;
+
+    // uncollectable
+    let uncollectable = {
+        x: [],
+        y: [],
+        speed: 2,
+        color: ["black"]
+    };
+
+    let blackNum = 0;
+    let rad = 10;
+
+    // add value to x property of collectable
+    
+
+
+
+    //invoke function 
     function draw(){
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawPlayer();
