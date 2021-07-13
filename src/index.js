@@ -1,4 +1,5 @@
 
+window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.querySelector(".canvas");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
@@ -150,8 +151,15 @@
         }
     }
 
-    // increase speed
-    function speedScore() {
+    function playUpdate() {
+        if (leftMove && player.x > 0) {
+            player.x -= 8;
+        }
+        
+        if (rightMove && player.x + player.size < canvas.width) {
+            player.x += 8;
+        }
+
         for (let i = 0; i < greenNum; i++) {
             collectable.y[i] += collectable.speed;
         }
@@ -160,28 +168,6 @@
             uncollectable.y[i] += uncollectable.speed;
         }
 
-        switch(score){
-            case 20:
-                uncollectable.speed = 3;
-                collectable.speed = 3;
-                level = 2;
-                break;
-            case 30:
-                level = 3;
-                break;
-            case 40: 
-                collectable.speed = 4;
-                level = 4;
-                break;
-            case 50:
-                level = 5;
-                break;
-        }
-
-    }
-
-    //detect collisions
-    function detectCollision() {
         for (let i = 0; i < greenNum; i++) {
             if (collectable.state[i]) {
                 if (player.x < collectable.x[i] + 10 && 
@@ -219,6 +205,24 @@
                 badTrack++;
             }
         }
+
+        switch(score){
+            case 20:
+                uncollectable.speed = 3;
+                collectable.speed = 3;
+                level = 2;
+                break;
+            case 30:
+                level = 3;
+                break;
+            case 40: 
+                collectable.speed = 4;
+                level = 4;
+                break;
+            case 50:
+                level = 5;
+                break;
+        }
     }
 
     function gameDone() {
@@ -249,8 +253,9 @@
             movePlayer();
             drawGreenball();
             drawBlackball();
-            speedScore();
-            detectCollision();
+            // speedScore();
+            // detectCollision();
+            playUpdate();
             randomGood();
             randomBad();
         // }
@@ -259,3 +264,5 @@
     }
 
     draw();
+
+});
