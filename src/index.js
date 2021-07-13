@@ -83,7 +83,7 @@
     
     // add value to x property of collectable
     let greenNum = 0;
-    function drawNewGood() {
+    function randomGood() {
         if (Math.random() < 0.2) {
             collectable.x.push(Math.random() * canvas.width);
             collectable.y.push(0);
@@ -103,7 +103,7 @@
     
     // add value to x property of uncollectable
     let blackNum = 0;
-    function drawNewBad() {
+    function randomBad() {
         if (score < 30) {
             if (Math.random() < 0.5) {
                 uncollectable.x.push(Math.random() * canvas.width);
@@ -125,7 +125,7 @@
     }
 
     // draw green ball
-    function drawGreenBall() {
+    function drawGreenball() {
         for (let i = 0; i < greenNum; i++) {
             if (collectable.state[i]) {
                 let trackGreen = (i + track);
@@ -139,7 +139,7 @@
         }
     }
 
-    // draw blackball 
+    // draw black ball 
     function drawBlackball() {
         for (let i = 0; i < blackNum; i++) {
             let trackBlack = (i + badTrack);
@@ -152,13 +152,89 @@
         }
     }
 
-    // 
+    // increase speed
+    function speedScore() {
+        for (let i = 0; i < greenNum; i++) {
+            collectable.y[i] += collectable.speed;
+        }
 
-    //invoke function 
-    function draw(){
+        for (let i = 0; i < blackNum; i++) {
+            uncollectable.y[i] += uncollectable.speed;
+        }
+
+        switch(score){
+            case 20:
+                uncollectable.speed = 3;
+                collectable.speed = 3;
+                level = 2;
+                break;
+            case 30:
+                level = 3;
+                break;
+            case 40: 
+                collectable.speed = 4;
+                level = 4;
+                break;
+            case 50:
+                level = 5;
+                break;
+        }
+
+    }
+
+    //detect collisions
+    function detectCollision() {
+        for (let i = 0; i < greenNum; i++) {
+            if (collectable.state[i]) {
+                if (player.x < collectable.x[i] + 10 && 
+                    player.x + 180 + 10 > collectable.x[i] && 
+                    player.y < collectable.y[i] + 10 && 
+                    player.y + 180 > collectable.y[i]) {
+                        score++;
+                        player.color = collectable.color[(i + track) % 26];
+                        collectable.state[i] = false;
+                    }
+            }
+
+            if (collectable.y[i] + 10 > canvas.height) {
+                collectable.x.shift();
+                collectable.y.shift();
+                collectable.state.shift;
+                track++;
+            }
+        }
+
+        for (let i = 0; i < blackNum; i++) {
+            if (player.x < uncollectable.x[i] + 10 && 
+                player.x + 180 + 10 > uncollectable.x[i] && 
+                player.y < uncollectable.y[i] + 10 && 
+                player.y + 180 > uncollectable.y[i]) {
+                    lives--;
+                    player.color = uncollectable.color[(i + badTrack) % 5];
+                    uncollectable.y[i] = 0;
+                    if (lives <= 0) gameOver();
+                }
+
+            if (uncollectable.y[i] + 10 > canvas.height) {
+                uncollectable.x.shift();
+                uncollectable.y.shift();
+                badTrack++;
+            }
+        }
+    }
+
+    //invoke functions
+    function draw() {
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 		drawPlayer();
 		movePlayer();
+        drawGreenball();
+        drawBlackball();
+        speedScore();
+        detectCollision();
+        randomGood();
+        randomBad();
 
 	    requestAnimationFrame(draw);
     }
