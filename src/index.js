@@ -8,10 +8,13 @@
 
     let leftMove = false;
     let rightMove = false;
-    let score = 0;
     let gameFrame = 0;
+    let track = 0;
+    let badTrack = 0;
+    let score = 0;
     let lives = 3;
     let gameOver = true;
+    
 
     // arrows
     document.addEventListener("keydown", keyPressed);
@@ -77,8 +80,18 @@
         color: ["green"],
         state: []
     };
-
+    
+    // add value to x property of collectable
     let greenNum = 0;
+    function drawNewGood() {
+        if (Math.random() < 0.2) {
+            collectable.x.push(Math.random() * canvas.width);
+            collectable.y.push(0);
+            collectable.state.push(true);
+        }
+        
+        greenNum = collectable.x.length;
+    }
 
     // uncollectable
     let uncollectable = {
@@ -87,14 +100,59 @@
         speed: 2,
         color: ["black"]
     };
-
-    let blackNum = 0;
-    let rad = 10;
-
-    // add value to x property of collectable
     
+    // add value to x property of uncollectable
+    let blackNum = 0;
+    function drawNewBad() {
+        if (score < 30) {
+            if (Math.random() < 0.5) {
+                uncollectable.x.push(Math.random() * canvas.width);
+                uncollectable.y.push(0);
+            } else if (score < 50) {
+                if (Math.random() < 0.1) {
+                    uncollectable.x.push(Math.random() * canvas.width);
+                    uncollectable.y.push(0);
+                }
+            } else {
+                if (Math.random() < 0.2) {
+                    uncollectable.x.push(Math.random() * canvas.width);
+                    uncollectable.y.push(0);
+                }
+            }
+        }
 
+        blackNum = uncollectable.x.length;
+    }
 
+    // draw green ball
+    function drawGreenBall() {
+        for (let i = 0; i < greenNum; i++) {
+            if (collectable.state[i]) {
+                let trackGreen = (i + track);
+
+                ctx.beginPath();
+                ctx.arc(collectable.x[i], collectable.y[i], 10, 0, Math.PI * 2);
+                ctx.fillStyle = collectable.color[trackGreen % 26];
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+
+    // draw blackball 
+    function drawBlackball() {
+        for (let i = 0; i < blackNum; i++) {
+            let trackBlack = (i + badTrack);
+
+            ctx.beginPath();
+            ctx.arc(collectable.x[i], collectable.y[i], 10, 0, Math.PI * 2);
+            ctx.fillStyle = uncollectable.color[trackGreen % 5];
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+
+    // 
 
     //invoke function 
     function draw(){
