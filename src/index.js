@@ -8,7 +8,7 @@
 
     let leftMove = false;
     let rightMove = false;
-    let gameFrame = 0;
+    // let gameFrame = 0;
     let track = 0;
     let badTrack = 0;
     let score = 0;
@@ -49,9 +49,9 @@
 
     // player
     const player = {
-        size: 180,
-        x: Math.floor(canvas.width - 180) / 2,
-        y: Math.floor(canvas.height - 80),
+        size: 100,
+        x: Math.floor(canvas.width - 100) / 2,
+        y: Math.floor(canvas.height - 100),
         color: "red"
     }
 
@@ -65,15 +65,14 @@
 
     function movePlayer() {
         if (leftMove && player.x > 0) {
-            player.x -= 5;
+            player.x -= 8;
         } else if (rightMove && player.x + player.size < canvas.width) {
-            player.x += 5;
+            player.x += 8;
         }
     }
-
     
     // collectable
-    let collect = {
+    let collectable = {
         x: [],
         y: [],
         speed: 2,
@@ -89,7 +88,6 @@
             collectable.y.push(0);
             collectable.state.push(true);
         }
-        
         greenNum = collectable.x.length;
     }
 
@@ -132,7 +130,7 @@
 
                 ctx.beginPath();
                 ctx.arc(collectable.x[i], collectable.y[i], 10, 0, Math.PI * 2);
-                ctx.fillStyle = collectable.color[trackGreen % 26];
+                ctx.fillStyle = collectable.color[trackGreen];
                 ctx.fill();
                 ctx.closePath();
             }
@@ -145,8 +143,8 @@
             let trackBlack = (i + badTrack);
 
             ctx.beginPath();
-            ctx.arc(collectable.x[i], collectable.y[i], 10, 0, Math.PI * 2);
-            ctx.fillStyle = uncollectable.color[trackGreen % 5];
+            ctx.arc(uncollectable.x[i], uncollectable.y[i], 10, 0, Math.PI * 2);
+            ctx.fillStyle = uncollectable.color[trackBlack];
             ctx.fill();
             ctx.closePath();
         }
@@ -187,11 +185,11 @@
         for (let i = 0; i < greenNum; i++) {
             if (collectable.state[i]) {
                 if (player.x < collectable.x[i] + 10 && 
-                    player.x + 180 + 10 > collectable.x[i] && 
+                    player.x + player.size + 10 > collectable.x[i] && 
                     player.y < collectable.y[i] + 10 && 
-                    player.y + 180 > collectable.y[i]) {
+                    player.y + player.size > collectable.y[i]) {
                         score++;
-                        player.color = collectable.color[(i + track) % 26];
+                        player.color = collectable.color[i + track];
                         collectable.state[i] = false;
                     }
             }
@@ -206,13 +204,13 @@
 
         for (let i = 0; i < blackNum; i++) {
             if (player.x < uncollectable.x[i] + 10 && 
-                player.x + 180 + 10 > uncollectable.x[i] && 
+                player.x + player.size + 10 > uncollectable.x[i] && 
                 player.y < uncollectable.y[i] + 10 && 
-                player.y + 180 > uncollectable.y[i]) {
+                player.y + player.size > uncollectable.y[i]) {
                     lives--;
-                    player.color = uncollectable.color[(i + badTrack) % 5];
+                    player.color = uncollectable.color[i + badTrack];
                     uncollectable.y[i] = 0;
-                    if (lives <= 0) gameOver();
+                    if (lives <= 0) gameDone();
                 }
 
             if (uncollectable.y[i] + 10 > canvas.height) {
@@ -223,70 +221,41 @@
         }
     }
 
+    function gameDone() {
+        collectable.x = [];
+        collectable.y = [];
+        uncollectable.x = [];
+        uncollectable.y = [];
+        collectable.state = [];
+        gameOver = true;
+    }
+
+    function playAgain() {
+        gameOver = false;
+        player.color = "red";
+        level = 1;
+        score = 0;
+        lives = 3;
+        collectable.speed = 2;
+        uncollectable.speed = 2;
+    }
+
     //invoke functions
     function draw() {
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		drawPlayer();
-		movePlayer();
-        drawGreenball();
-        drawBlackball();
-        speedScore();
-        detectCollision();
-        randomGood();
-        randomBad();
+        // if (!gameDone) {
+            drawPlayer();
+            movePlayer();
+            drawGreenball();
+            drawBlackball();
+            speedScore();
+            detectCollision();
+            randomGood();
+            randomBad();
+        // }
 
-	    requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
     }
 
     draw();
-
-    // const letters = {
-    //     x: [],
-    //     y: [],
-    //     speed: 2,
-
-    // }
-
-    // const letterImage = new Image();
-    // letterImage.src = 'src/images/alphabet.png';
-
-    // const lettersArr = [];
-
-    // class Letter {
-    //     constructor() {
-    //         this.x = Math.random() * canvas.width;
-    //         this.y = Math.random() * canvas.height;
-    //         this.radius = 50;
-    //         this.angle = 0;
-    //         this.frameX = 0;
-    //         this.frameY = 0;
-    //         this.frame = 0;
-    //         this.spriteWidth = 144;
-    //         this.spriteHeight = 264;
-    //     }
-
-    //     update() {
-    //         this.x++;
-    //         this.y++;
-    //     }
-
-    //     draw() {
-    //         ctx.fillRect(this.x, this.y, this.width, this.height);
-    //     }
-    // }
-
-    // for (let i = 0; i < 26; i++) {
-    //     lettersArr.push(new Letter());
-    // }
-
-    // function animate() {
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //     requestAnimationFrame(animate);
-    // }
-
-    // animate();
-
-
-
