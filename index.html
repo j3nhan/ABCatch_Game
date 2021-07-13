@@ -5,14 +5,23 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="./dist/main.css" />
-        <script src="./dist/main.js"></script>
+        <!-- <link rel="stylesheet" href="./dist/main.css" /> -->
         <link rel="stylesheet" href="./src/styles/index.css">
+        <script src="./dist/main.js"></script>
         <title>ABCatch Game</title>
-    </head>
 
+    </head>
+    
     <body>
-        <canvas id="canvas"></canvas>
+        <canvas class="canvas"></canvas>
+        
+        <h2 id="score">SCORE: 0</h2>
+        <h3>INSTRUCTIONS: Please use left and right arrow keys to move the book object.</h3>
+        <br>
+        <p>You will have three chances to catch falling alphabet letters into the movable book. Catching more letters
+        increases the score, but beware of falling worms that will eat the pages of the book.</p>
+        
+        <script src="./src/index.js"></script>
     </body>
 
 </html>
