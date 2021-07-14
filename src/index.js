@@ -1,15 +1,16 @@
 
 window.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.querySelector(".canvas");
+    const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = 700;
+    canvas.height = 500;
 
     // const showScore = document.querySelector('#score');
 
     let leftMove = false;
     let rightMove = false;
     // let gameFrame = 0;
+    let level = 1;
     let track = 0;
     let badTrack = 0;
     let score = 0;
@@ -50,9 +51,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // player
     const player = {
-        size: 100,
-        x: Math.floor(canvas.width - 100) / 2,
-        y: Math.floor(canvas.height - 100),
+        size: 60,
+        x: Math.floor(canvas.width - 60) / 2,
+        y: Math.floor(canvas.height - 60),
         color: "red"
     }
 
@@ -131,7 +132,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 ctx.beginPath();
                 ctx.arc(collectable.x[i], collectable.y[i], 10, 0, Math.PI * 2);
-                ctx.fillStyle = collectable.color[trackGreen];
                 ctx.fill();
                 ctx.closePath();
             }
@@ -145,7 +145,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
             ctx.beginPath();
             ctx.arc(uncollectable.x[i], uncollectable.y[i], 10, 0, Math.PI * 2);
-            ctx.fillStyle = uncollectable.color[trackBlack];
             ctx.fill();
             ctx.closePath();
         }
@@ -253,8 +252,6 @@ window.addEventListener('DOMContentLoaded', () => {
             movePlayer();
             drawGreenball();
             drawBlackball();
-            // speedScore();
-            // detectCollision();
             playUpdate();
             randomGood();
             randomBad();

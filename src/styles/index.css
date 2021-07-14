@@ -29,9 +29,7 @@ p {
     margin-top: 10px;
 }
 
-.canvas {
-    width: 700px;
-    height: 500px;
+canvas {
     border: 3px solid black;
     display: block;
     background: rgb(117, 197, 247);
