@@ -1,16 +1,26 @@
-canvas {
-    background: #75c5f7;
+.canvas-cont {
     display: block;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 100px;
+    position: absolute;
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
 }
 
-h3 {
+canvas {
+    background: rgb(131, 198, 240);
+}
+
+
+.container {
+    position: relative;
     text-align: center;
+    margin-top: 50px;
 }
 
 p {
     font-size: 16px;
-    text-align: center;
     font-family: Helvetica;
-}
+} 
