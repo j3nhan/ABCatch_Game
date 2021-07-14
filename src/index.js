@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let leftMove = false;
     let rightMove = false;
     // let gameFrame = 0;
+    let radius = 20;
     let level = 1;
     let track = 0;
     let badTrack = 0;
@@ -51,9 +52,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // player
     const player = {
-        size: 60,
-        x: Math.floor(canvas.width - 60) / 2,
-        y: Math.floor(canvas.height - 60),
+        size: 20,
+        x: Math.floor(canvas.width - 20) / 2,
+        y: Math.floor(canvas.height - 20),
         color: "red"
     }
 
@@ -78,14 +79,14 @@ window.addEventListener('DOMContentLoaded', () => {
         x: [],
         y: [],
         speed: 2,
-        color: ["green"],
+        color: "green",
         state: []
     };
     
     // add value to x property of collectable
     let greenNum = 0;
     function randomGood() {
-        if (Math.random() < 0.2) {
+        if (Math.random() < 0.02) {
             collectable.x.push(Math.random() * canvas.width);
             collectable.y.push(0);
             collectable.state.push(true);
@@ -98,14 +99,14 @@ window.addEventListener('DOMContentLoaded', () => {
         x: [],
         y: [],
         speed: 2,
-        color: ["black"]
+        color: "black"
     };
     
     // add value to x property of uncollectable
     let blackNum = 0;
     function randomBad() {
         if (score < 30) {
-            if (Math.random() < 0.5) {
+            if (Math.random() < 0.05) {
                 uncollectable.x.push(Math.random() * canvas.width);
                 uncollectable.y.push(0);
             } else if (score < 50) {
@@ -127,11 +128,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // draw green ball
     function drawGreenball() {
         for (let i = 0; i < greenNum; i++) {
-            if (collectable.state[i]) {
+            if (collectable.state[i] === true) {
                 let trackGreen = (i + track);
 
                 ctx.beginPath();
-                ctx.arc(collectable.x[i], collectable.y[i], 10, 0, Math.PI * 2);
+                ctx.arc(collectable.x[i], collectable.y[i], radius, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.closePath();
             }
@@ -144,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
             let trackBlack = (i + badTrack);
 
             ctx.beginPath();
-            ctx.arc(uncollectable.x[i], uncollectable.y[i], 10, 0, Math.PI * 2);
+            ctx.arc(uncollectable.x[i], uncollectable.y[i], radius, 0, Math.PI * 2);
             ctx.fill();
             ctx.closePath();
         }
@@ -169,17 +170,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < greenNum; i++) {
             if (collectable.state[i]) {
-                if (player.x < collectable.x[i] + 10 && 
-                    player.x + player.size + 10 > collectable.x[i] && 
-                    player.y < collectable.y[i] + 10 && 
+                if (player.x < collectable.x[i] + radius && 
+                    player.x + player.size + radius > collectable.x[i] && 
+                    player.y < collectable.y[i] + radius && 
                     player.y + player.size > collectable.y[i]) {
                         score++;
-                        player.color = collectable.color[i + track];
                         collectable.state[i] = false;
                     }
             }
 
-            if (collectable.y[i] + 10 > canvas.height) {
+            if (collectable.y[i] + radius > canvas.height) {
                 collectable.x.shift();
                 collectable.y.shift();
                 collectable.state.shift;
@@ -188,9 +188,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         for (let i = 0; i < blackNum; i++) {
-            if (player.x < uncollectable.x[i] + 10 && 
-                player.x + player.size + 10 > uncollectable.x[i] && 
-                player.y < uncollectable.y[i] + 10 && 
+            if (player.x < uncollectable.x[i] + radius && 
+                player.x + player.size + radius > uncollectable.x[i] && 
+                player.y < uncollectable.y[i] + radius && 
                 player.y + player.size > uncollectable.y[i]) {
                     lives--;
                     player.color = uncollectable.color[i + badTrack];
@@ -198,7 +198,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (lives <= 0) gameDone();
                 }
 
-            if (uncollectable.y[i] + 10 > canvas.height) {
+            if (uncollectable.y[i] + radius > canvas.height) {
                 uncollectable.x.shift();
                 uncollectable.y.shift();
                 badTrack++;
@@ -225,12 +225,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function gameDone() {
+        gameOver = true;
         collectable.x = [];
         collectable.y = [];
         uncollectable.x = [];
         uncollectable.y = [];
         collectable.state = [];
-        gameOver = true;
     }
 
     function playAgain() {
@@ -255,8 +255,30 @@ window.addEventListener('DOMContentLoaded', () => {
             playUpdate();
             randomGood();
             randomBad();
+
+            // score
+            // ctx.fillStyle = "black";
+            // ctx.font = "20px Helvetica";
+            // ctx.textAlign = "left";
+            // ctx.fillText("Score: " + score, 10, 25);
+        
+            // lives
+            // ctx.textAlign = "right";
+            // ctx.fillText("Lives: " + lives, 680, 25);
+        // }
+        // else{
+            // ctx.fillStyle = "black";
+            // ctx.font = "25px Helvetica";
+            // ctx.textAlign = "center";
+            // ctx.fillText("GAME OVER!", canvas.width/2, 175);
+            
+            // ctx.font = "20px Helvetica";
+            // ctx.fillText("PRESS SPACE TO PLAY", canvas.width/2, 475);
+            
+            // ctx.fillText("FINAL SCORE: " + score, canvas.width/2, 230);
         // }
 
+        // document.getElementById("level").innerHTML = "Level: " + level;
         requestAnimationFrame(draw);
     }
 
