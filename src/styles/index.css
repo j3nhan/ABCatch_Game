@@ -27,14 +27,12 @@ canvas {
 }
 
 .btn-cont {
-    position: absolute;
+    position: relative;
     text-align: center;
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: auto;
-    top: 92vh; 
-    left: 37vw;
+    top: 75vh;
     flex-direction: row;
 }
 

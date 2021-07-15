@@ -95,6 +95,8 @@ function blackBall() {
 		ctx.fillStyle = "black";
 		ctx.fill();
 		ctx.closePath();
+
+		ctx.drawImage(resources.get("./images/aliveObj.png"))
 	}
 }
 
