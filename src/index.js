@@ -8,8 +8,6 @@ let rightMove = false;
 let gameOver = true;
 let score = 0;
 let lives = 3;
-let track = 0;
-let badTrack = 0;
 let level = 1;
 const radius = 20;
 let pinkCount = 0;
@@ -149,7 +147,6 @@ function game() {
 			collectible.x.shift();
 			collectible.y.shift();
 			collectible.state.shift();
-			track++;
 		}
 	}
 
@@ -169,8 +166,7 @@ function game() {
 		if (uncollectible.y[i] + radius > canvas.height) {
 			uncollectible.x.shift();
 			uncollectible.y.shift();
-			badTrack++;
-		}
+\		}
 	}
 
 	switch (score) {
