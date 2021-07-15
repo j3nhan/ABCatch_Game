@@ -81,7 +81,7 @@ const uncollectible = {
 // draw ball 
 function pinkBall() {
 	for (let i = 0; i < pinkCount; i++) {
-		if (collectible.state[i] == true) {		
+		if (collectible.state[i] === true) {		
 			ctx.beginPath();
 			ctx.arc(collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2);
 			ctx.fillStyle = "pink";
@@ -161,7 +161,7 @@ function game() {
 			lives--;
 			uncollectible.y[i] = 0;
 
-			if (lives <= 0) {
+			if (lives === 0) {
 				gameIsOver();
 			}
 		}
