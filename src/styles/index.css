@@ -3,6 +3,14 @@ body {
     background-size: cover;
 } 
 
+.p-cont {
+    position: relative;
+    text-align: center;
+    margin-top: 70px;
+    font-weight: bold;
+    font-family: 'Quantico', sans-serif;
+}
+
 .canvas-cont {
     display: block;
     margin: auto;
@@ -17,20 +25,6 @@ body {
 canvas {
     background: rgb(7, 100, 7);
 }
-
-
-.container {
-    position: relative;
-    text-align: center;
-    margin-top: 70px;
-    font-family: 'Quantico', sans-serif;
-}
-
-p {
-    font-size: 18px;
-    font-weight: bold;
-    font-family: Helvetica;
-} 
 
 .btn-cont {
     position: absolute;
