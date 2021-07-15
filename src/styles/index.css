@@ -32,7 +32,7 @@ p {
     font-family: Helvetica;
 } 
 
-/* .btn-cont {
+.btn-cont {
     position: absolute;
     text-align: center;
     display: flex;
@@ -41,7 +41,17 @@ p {
     left: 43vw;
     flex-direction: row;
     align-items: center;
-} */
+}
 
+.btn-1 {
 
+}
+
+.btn-2 {
+
+}
+
+.btn-3 {
+    
+}
  
