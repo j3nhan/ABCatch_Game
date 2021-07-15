@@ -95,8 +95,6 @@ function blackBall() {
 		ctx.fillStyle = "black";
 		ctx.fill();
 		ctx.closePath();
-
-		ctx.drawImage(resources.get("./images/aliveObj.png"))
 	}
 }
 
@@ -215,7 +213,7 @@ function draw() {
 	if (initialPlay) {
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-		ctx.font = "bold 100px Lato";
+		ctx.font = "oblique bold 100px Lato";
 		ctx.fillText("ABCatch", canvas.width/2, 250);
 		ctx.fillStyle = "black";
 		ctx.font = "bold 20px Lato";
@@ -240,12 +238,12 @@ function draw() {
 
 	} else {
 		ctx.fillStyle = "white";
-		ctx.font = "bold 80px Lato";
+		ctx.font = "oblique bold 80px Lato";
 		ctx.textAlign = "center";
 		ctx.fillText("GAME OVER", canvas.width/2, 200);
 		ctx.fillStyle = "black";
 		ctx.font = "bold 30px Lato";
-		ctx.fillText("FINAL SCORE: " + score, canvas.width/2, 260);
+		ctx.fillText("Final Score: " + score, canvas.width/2, 260);
 	}
 
 	requestAnimationFrame(draw);
