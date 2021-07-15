@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 500;
 
+let initialPlay = true;
 let leftMove = false;
 let rightMove = false;
 let gameOver = true;
@@ -195,6 +196,7 @@ function gameIsOver() {
 }
 
 function reset() {
+	initialPlay = false;
 	gameOver = false;
 	player.color = "red";
 	level = 1;
@@ -207,22 +209,31 @@ function reset() {
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	if (!gameOver) {
-		drawPlayer();
-		blackBall();
-		pinkBall();
-		game();
-		randomGood();
-		randomBad();
-			 
+	if (initialPlay) {
+		ctx.fillStyle = "white";
+		ctx.textAlign = "center";
+		ctx.font = "bold 100px Lato";
+		ctx.fillText("ABCatch", canvas.width/2, 250);
 		ctx.fillStyle = "black";
-		ctx.font = "bond 30px Lato";
+		ctx.font = "bold 20px Lato";
+		ctx.fillText("Tap Spacebar to start game", canvas.width/2, 450)
+
+	} else if (!gameOver) {
+		ctx.fillStyle = "white";
+		ctx.font = "bold 25px Lato";
 		ctx.textAlign = "left"; 
 		ctx.fillText("LEVEL: " + level, 10, 25); 
 		ctx.textAlign = "center";
 		ctx.fillText("SCORE: " + score, 300 , 25); 
 		ctx.textAlign = "right";
 		ctx.fillText("LIVES: " + lives, 590 , 25); 
+
+		drawPlayer();
+		blackBall();
+		pinkBall();
+		game();
+		randomGood();
+		randomBad();
 
 	} else {
 		ctx.fillStyle = "black";
