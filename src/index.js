@@ -65,7 +65,6 @@ const collectible = {
 	x:[],
 	y:[], 
 	speed: 2,
-	color: ["pink"],
 	state: []
 };
 
@@ -73,7 +72,6 @@ const uncollectible = {
 	x:[],
 	y:[],
 	speed: 2,
-	color: ["black"]
 };
 
 // draw ball 
@@ -166,7 +164,7 @@ function game() {
 		if (uncollectible.y[i] + radius > canvas.height) {
 			uncollectible.x.shift();
 			uncollectible.y.shift();
-\		}
+		}
 	}
 
 	switch (score) {
@@ -208,6 +206,7 @@ function reset() {
 
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 	if (!gameOver) {
 		drawPlayer();
 		blackBall();
