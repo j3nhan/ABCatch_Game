@@ -32,6 +32,7 @@ canvas {
     align-items: center;
     display: flex;
     justify-content: center;
+    margin: auto;
     top: 92vh; 
     left: 37vw;
     flex-direction: row;
