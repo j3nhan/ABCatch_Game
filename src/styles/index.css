@@ -33,13 +33,14 @@ canvas {
     display: flex;
     justify-content: center;
     top: 92vh; 
-    left: 40vw;
+    left: 37vw;
     flex-direction: row;
 }
 
-.btn-1, .btn-2, .btn-3{
+.btn-1, .btn-2, .btn-3 {
     margin: 5px;
-    border: none;
+    padding: 5px;
+    font-family: 'Playfair Display', serif;
     color: black;
     background-color: white;
     border-radius: 4px;
@@ -59,7 +60,7 @@ canvas {
 
 .btn-1:active, .btn-2:active, .btn-3:active {
     transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
 }
 
 .btn-1:before, .btn-2:before, .btn-3:before {
