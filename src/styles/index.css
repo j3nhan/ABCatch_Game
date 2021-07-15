@@ -44,6 +44,7 @@ p {
 }
 
 .btn-1, .btn-2, .btn-3{
+    margin: 5px;
     border: none;
     color: black;
     background-color: white;
@@ -58,7 +59,7 @@ p {
 
 .btn-1:hover, .btn-2:hover, .btn-3:hover {
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     transform: translateY(-3px);
 }
 
@@ -80,22 +81,14 @@ p {
 }
 
 .btn-1:hover:before, .btn-2:hover:before, .btn-3:hover:before {
-    
-}
-
-
-.btn-1:after, .btn-2:after, .btn-3:after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
+    transition: 0.2s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
     z-index: -1;
-    transition: all 0.4s;
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
 }
+
+
 
 
  
