@@ -1,3 +1,9 @@
+body {
+    background-image: url("/src/images/background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+} 
+
 .canvas-cont {
     display: block;
     margin: auto;
