@@ -117,6 +117,7 @@ function randomBad() {
 	blackCount = uncollectible.x.length;
 }
 
+// catch object and track score 
 function game() {
 	if (leftMove && player.x > 0) {
 		player.x -= 7;
