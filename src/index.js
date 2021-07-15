@@ -1,287 +1,245 @@
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = 600;
+canvas.height = 500;
 
-window.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = 700;
-    canvas.height = 500;
+let leftMove = false;
+let rightMove = false;
+let gameOver = true;
+let score = 0;
+let lives = 3;
+let track = 0;
+let badTrack = 0;
+let level = 1;
+const radius = 20;
+let pinkCount = 0;
+let blackCount = 0;
 
-    // const showScore = document.querySelector('#score');
+// keys to push
+document.addEventListener("keydown", keyPressed);
+document.addEventListener("keyup", keyReleased);
 
-    let leftMove = false;
-    let rightMove = false;
-    // let gameFrame = 0;
-    let radius = 20;
-    let level = 1;
-    let track = 0;
-    let badTrack = 0;
-    let score = 0;
-    let lives = 3;
-    let gameOver = true;
-    
-
-    // arrows
-    document.addEventListener("keydown", keyPressed);
-    document.addEventListener("keyup", keyReleased);
-
-    function keyPressed(e) {
-        switch (e.keyCode) {
-            case 39:
-                rightMove = true;
-                break;
-            case 37:
-                leftMove = true;
-                break;
-            case (32 && gameOver):
-                playAgain();
-                break;
-            default:
-                alert("LEFT and RIGHT arrow keys only!!!");
-        }
+function keyPressed(e) {
+    switch (e.keyCode) {
+        case 39:
+            rightMove = true;
+            break;
+        case 37:
+            leftMove = true;
+            break;
+        case 32:
+            reset();
+            break;
+        default:
+            alert("SPACEBAR to begin. LEFT and RIGHT arrow keys to move. ");
     }
+}
 
-    function keyReleased(e) {
-        switch (e.keyCode) {
-            case 39:
-                rightMove = false;
-                break;
-            case 37:
-                leftMove = false;
-                break;
-        }
+function keyReleased(e) {
+    switch (e.keyCode) {
+        case 39:
+            rightMove = false;
+            break;
+        case 37:
+            leftMove = false;
+            break;
     }
+}
 
-    // player
-    const player = {
-        size: 20,
-        x: Math.floor(canvas.width - 20) / 2,
-        y: Math.floor(canvas.height - 20),
-        color: "red"
-    }
+// player 
+const player = {
+	size: 50,
+	x: (canvas.width - 50)/ 2,
+	y: canvas.height - 50,
+	color: "red"
+};
 
-    function drawPlayer() {
-        ctx.beginPath();
-        ctx.rect(player.x, player.y, player.size, player.size);
-        ctx.fillStyle = player.color;
-        ctx.fill();
-        ctx.closePath();
-    }
+function drawPlayer() {
+	ctx.beginPath();
+	ctx.rect(player.x, player.y, player.size, player.size);
+	ctx.fillStyle = player.color;
+	ctx.fill();
+	ctx.closePath();
+}
 
-    function movePlayer() {
-        if (leftMove && player.x > 0) {
-            player.x -= 8;
-        } else if (rightMove && player.x + player.size < canvas.width) {
-            player.x += 8;
-        }
-    }
-    
-    // collectable
-    let collectable = {
-        x: [],
-        y: [],
-        speed: 2,
-        color: "green",
-        state: []
-    };
-    
-    // add value to x property of collectable
-    let greenNum = 0;
-    function randomGood() {
-        if (Math.random() < 0.02) {
-            collectable.x.push(Math.random() * canvas.width);
-            collectable.y.push(0);
-            collectable.state.push(true);
-        }
-        greenNum = collectable.x.length;
-    }
+// ball collection
+const collectible = {
+	x:[],
+	y:[], 
+	speed: 2,
+	color: ["pink"],
+	state: []
+};
 
-    // uncollectable
-    let uncollectable = {
-        x: [],
-        y: [],
-        speed: 2,
-        color: "black"
-    };
-    
-    // add value to x property of uncollectable
-    let blackNum = 0;
-    function randomBad() {
-        if (score < 30) {
-            if (Math.random() < 0.05) {
-                uncollectable.x.push(Math.random() * canvas.width);
-                uncollectable.y.push(0);
-            } else if (score < 50) {
-                if (Math.random() < 0.1) {
-                    uncollectable.x.push(Math.random() * canvas.width);
-                    uncollectable.y.push(0);
-                }
-            } else {
-                if (Math.random() < 0.2) {
-                    uncollectable.x.push(Math.random() * canvas.width);
-                    uncollectable.y.push(0);
-                }
-            }
-        }
+const uncollectible = {
+	x:[],
+	y:[],
+	speed: 2,
+	color: ["black"]
+};
 
-        blackNum = uncollectable.x.length;
-    }
+// draw ball 
+function pinkBall() {
+	for (let i = 0; i < pinkCount; i++) {
+		if (collectible.state[i] == true) {		
+			ctx.beginPath();
+			ctx.arc(collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2);
+			ctx.fillStyle = "pink";
+			ctx.fill();
+			ctx.closePath();
+		}
+	}
+}
 
-    // draw green ball
-    function drawGreenball() {
-        for (let i = 0; i < greenNum; i++) {
-            if (collectable.state[i] === true) {
-                let trackGreen = (i + track);
+function blackBall() {
+	for (let i = 0; i < blackCount; i++) {
+		ctx.beginPath();
+		ctx.arc(uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2);
+		ctx.fillStyle = "black";
+		ctx.fill();
+		ctx.closePath();
+	}
+}
 
-                ctx.beginPath();
-                ctx.arc(collectable.x[i], collectable.y[i], radius, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.closePath();
-            }
-        }
-    }
+// random ball generator
+function randomGood() {
+	if (Math.random() < 0.03) {
+		collectible.x.push(Math.random() * canvas.width);
+		collectible.y.push(0);
+		collectible.state.push(true);
+	}
+	pinkCount = collectible.x.length;
+}
 
-    // draw black ball 
-    function drawBlackball() {
-        for (let i = 0; i < blackNum; i++) {
-            let trackBlack = (i + badTrack);
+function randomBad() {
+	if (Math.random() < 0.02) {
+			uncollectible.x.push(Math.random() * canvas.width);
+			uncollectible.y.push(0);
+	}
 
-            ctx.beginPath();
-            ctx.arc(uncollectable.x[i], uncollectable.y[i], radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.closePath();
-        }
-    }
+	blackCount = uncollectible.x.length;
+}
 
-    function playUpdate() {
-        if (leftMove && player.x > 0) {
-            player.x -= 8;
-        }
-        
-        if (rightMove && player.x + player.size < canvas.width) {
-            player.x += 8;
-        }
+function game() {
+	if (leftMove && player.x > 0) {
+		player.x -= 7;
+	}
+	if (rightMove && player.x + player.size < canvas.width) {
+		player.x += 7;
+	}
+	for (let i = 0; i < pinkCount; i++) {
+		collectible.y[i] += collectible.speed;
+	}
+	for (let i = 0; i < blackCount; i++) {
+		uncollectible.y[i] += uncollectible.speed;
+	}
+	
+	for (let i = 0; i < pinkCount; i++) {
+		if (collectible.state[i]) {
+			if (player.x < collectible.x[i] + radius && 
+				player.x + player.size + radius > collectible.x[i] && 
+				player.y < collectible.y[i] + radius && 
+				player.y + player.size > collectible.y[i]) {
+				score++
+				collectible.state[i] = false;
+			}
+		}
 
-        for (let i = 0; i < greenNum; i++) {
-            collectable.y[i] += collectable.speed;
-        }
+		if (collectible.y[i] + radius > canvas.height) {
+			collectible.x.shift();
+			collectible.y.shift();
+			collectible.state.shift();
+			track++;
+		}
+	}
 
-        for (let i = 0; i < blackNum; i++) {
-            uncollectable.y[i] += uncollectable.speed;
-        }
+	for (let i = 0; i < blackCount; i++) {
+		if (player.x < uncollectible.x[i] + radius && 
+			player.x + player.size + radius > uncollectible.x[i] && 
+			player.y < uncollectible.y[i] + radius && 
+			player.y + player.size > uncollectible.y[i]) {
+			lives--;
+			uncollectible.y[i] = 0;
 
-        for (let i = 0; i < greenNum; i++) {
-            if (collectable.state[i]) {
-                if (player.x < collectable.x[i] + radius && 
-                    player.x + player.size + radius > collectable.x[i] && 
-                    player.y < collectable.y[i] + radius && 
-                    player.y + player.size > collectable.y[i]) {
-                        score++;
-                        collectable.state[i] = false;
-                    }
-            }
+			if (lives <= 0) {
+				gameIsOver();
+			}
+		}
 
-            if (collectable.y[i] + radius > canvas.height) {
-                collectable.x.shift();
-                collectable.y.shift();
-                collectable.state.shift;
-                track++;
-            }
-        }
+		if (uncollectible.y[i] + radius > canvas.height) {
+			uncollectible.x.shift();
+			uncollectible.y.shift();
+			badTrack++;
+		}
+	}
 
-        for (let i = 0; i < blackNum; i++) {
-            if (player.x < uncollectable.x[i] + radius && 
-                player.x + player.size + radius > uncollectable.x[i] && 
-                player.y < uncollectable.y[i] + radius && 
-                player.y + player.size > uncollectable.y[i]) {
-                    lives--;
-                    player.color = uncollectable.color[i + badTrack];
-                    uncollectable.y[i] = 0;
-                    if (lives <= 0) gameDone();
-                }
+	switch (score) {
+		case 10:
+			level = 2;
+			uncollectible.speed = 3;
+			collectible.speed = 3;
+			break;
+		case 20:
+			level = 3;
+			collectible.speed = 4;
+			break;
+		case 30: 
+			level = 4;
+			collectible.speed = 5;
+			uncollectible.speed = 4;
+			break;
+	}
+}
 
-            if (uncollectable.y[i] + radius > canvas.height) {
-                uncollectable.x.shift();
-                uncollectable.y.shift();
-                badTrack++;
-            }
-        }
+function gameIsOver() {
+	collectible.x = [];
+	collectible.y = [];
+	uncollectible.x = [];
+	uncollectible.y = [];
+	collectible.state = [];
+	gameOver = true;
+}
 
-        switch(score){
-            case 20:
-                uncollectable.speed = 3;
-                collectable.speed = 3;
-                level = 2;
-                break;
-            case 30:
-                level = 3;
-                break;
-            case 40: 
-                collectable.speed = 4;
-                level = 4;
-                break;
-            case 50:
-                level = 5;
-                break;
-        }
-    }
+function reset() {
+	gameOver = false;
+	player.color = "red";
+	level = 1;
+	score = 0;
+	lives = 3;
+	uncollectible.speed = 2;
+	collectible.speed = 2;
+}
 
-    function gameDone() {
-        gameOver = true;
-        collectable.x = [];
-        collectable.y = [];
-        uncollectable.x = [];
-        uncollectable.y = [];
-        collectable.state = [];
-    }
+function draw() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if (!gameOver) {
+		drawPlayer();
+		blackBall();
+		pinkBall();
+		game();
+		randomGood();
+		randomBad();
+			 
+		ctx.fillStyle = "black";
+		ctx.font = "bond 30px Lato";
+		ctx.textAlign = "left"; 
+		ctx.fillText("LEVEL: " + level, 10, 25); 
+		ctx.textAlign = "center";
+		ctx.fillText("SCORE: " + score, 300 , 25); 
+		ctx.textAlign = "right";
+		ctx.fillText("LIVES: " + lives, 590 , 25); 
 
-    function playAgain() {
-        gameOver = false;
-        player.color = "red";
-        level = 1;
-        score = 0;
-        lives = 3;
-        collectable.speed = 2;
-        uncollectable.speed = 2;
-    }
+	} else {
+		ctx.fillStyle = "black";
+		ctx.font = "bold 50px Lato";
+		ctx.textAlign = "center";
+		ctx.fillText("GAME OVER", canvas.width/2, 175);
+		ctx.font = "bold 25px Lato";
+		ctx.fillText("FINAL SCORE: " + score, canvas.width/2, 230);
+	}
 
-    //invoke functions
-    function draw() {
-	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	requestAnimationFrame(draw);
+}
 
-        // if (!gameDone) {
-            drawPlayer();
-            movePlayer();
-            drawGreenball();
-            drawBlackball();
-            playUpdate();
-            randomGood();
-            randomBad();
+draw();
 
-            // score
-            // ctx.fillStyle = "black";
-            // ctx.font = "20px Helvetica";
-            // ctx.textAlign = "left";
-            // ctx.fillText("Score: " + score, 10, 25);
-        
-            // lives
-            // ctx.textAlign = "right";
-            // ctx.fillText("Lives: " + lives, 680, 25);
-        // }
-        // else{
-            // ctx.fillStyle = "black";
-            // ctx.font = "25px Helvetica";
-            // ctx.textAlign = "center";
-            // ctx.fillText("GAME OVER!", canvas.width/2, 175);
-            
-            // ctx.font = "20px Helvetica";
-            // ctx.fillText("PRESS SPACE TO PLAY", canvas.width/2, 475);
-            
-            // ctx.fillText("FINAL SCORE: " + score, canvas.width/2, 230);
-        // }
-
-        // document.getElementById("level").innerHTML = "Level: " + level;
-        requestAnimationFrame(draw);
-    }
-
-    draw();
-
-});
