@@ -3,12 +3,6 @@ const ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 500;
 
-let background = new Image();
-background.src = "src/images/chalkboard.jpg"
-background.onload = function() {
-	ctx.drawImage(background, 0, 0);
-}
-
 let initialPlay = true;
 let leftMove = false;
 let rightMove = false;
