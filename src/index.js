@@ -236,12 +236,13 @@ function draw() {
 		randomBad();
 
 	} else {
-		ctx.fillStyle = "black";
-		ctx.font = "bold 50px Lato";
+		ctx.fillStyle = "white";
+		ctx.font = "bold 80px Lato";
 		ctx.textAlign = "center";
-		ctx.fillText("GAME OVER", canvas.width/2, 175);
-		ctx.font = "bold 25px Lato";
-		ctx.fillText("FINAL SCORE: " + score, canvas.width/2, 230);
+		ctx.fillText("GAME OVER", canvas.width/2, 200);
+		ctx.fillStyle = "black";
+		ctx.font = "bold 30px Lato";
+		ctx.fillText("FINAL SCORE: " + score, canvas.width/2, 260);
 	}
 
 	requestAnimationFrame(draw);
