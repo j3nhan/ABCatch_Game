@@ -82,7 +82,9 @@ canvas {
     z-index: -1;
 }
 
-
+ul li {
+    display: inline-block;
+}
 
 
  
