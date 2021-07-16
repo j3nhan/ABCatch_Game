@@ -7,7 +7,7 @@ body {
 .p-cont {
     position: relative;
     text-align: center;
-    margin-top: 8px;
+    margin-top: 4px;
     font-weight: bold;
     font-family: 'Quantico', sans-serif;
 }
@@ -18,7 +18,7 @@ body {
     margin-top: 100px;
     position: absolute;
     width: 100vw;
-    height: 70vh;
+    height: 65vh;
     display: flex;
     justify-content: center;
 }
@@ -34,17 +34,14 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    top: 95vh;
-}
-
-li {
-    cursor: pointer;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    top: 90vh;
 }
 
 ul li {
     display: inline-block;
     margin: 5px;
+    cursor: pointer;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 
