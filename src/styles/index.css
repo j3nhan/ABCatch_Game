@@ -1,13 +1,13 @@
 body {
     background-image: url("/src/images/background.jpeg");
     background-size: cover;
-    margin: 4px;
+    margin: 6px;
 } 
 
 .p-cont {
     position: relative;
     text-align: center;
-    margin-top: 4px;
+    margin-top: 6px;
     font-weight: bold;
     font-family: 'Quantico', sans-serif;
 }
@@ -34,7 +34,7 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    top: 90vh;
+    top: 70vh;
 }
 
 ul li {
