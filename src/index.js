@@ -18,7 +18,7 @@ const book = new Image();
 book.src = "src/images/book.png";
 
 const letter = new Image();
-letter.src = "src/images/alphabet.png"
+letter.src = "src/images/letters.png"
 
 const worm = new Image();
 worm.src = "src/images/worm.png"
@@ -106,7 +106,7 @@ function blackBall() {
 		ctx.fill();
 		ctx.closePath();
 
-		ctx.drawImage(worm, uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2)
+		ctx.drawImage(worm, 0, 0, 1214, 787, uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2)
 	}
 }
 
