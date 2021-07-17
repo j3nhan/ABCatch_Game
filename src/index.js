@@ -14,6 +14,9 @@ const radius = 20;
 let pinkCount = 0;
 let blackCount = 0;
 
+const book = new Image();
+book.src = "src/images/book.png";
+
 // keys to push
 document.addEventListener("keydown", keyPressed);
 document.addEventListener("keyup", keyReleased);
@@ -56,9 +59,11 @@ const player = {
 function drawPlayer() {
 	ctx.beginPath();
 	ctx.rect(player.x, player.y, player.size, player.size);
-	ctx.fillStyle = player.color;
-	ctx.fill();
+	// ctx.fillStyle = player.color;
+	// ctx.fill();
 	ctx.closePath();
+	
+	ctx.drawImage(book, player.x, player.y, player.size, player.size);
 }
 
 // ball collection
