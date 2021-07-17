@@ -17,6 +17,12 @@ let blackCount = 0;
 const book = new Image();
 book.src = "src/images/book.png";
 
+const letter = new Image();
+letter.src = "src/images/alphabet.png"
+
+const worm = new Image();
+worm.src = "src/images/worm.png"
+
 // keys to push
 document.addEventListener("keydown", keyPressed);
 document.addEventListener("keyup", keyReleased);
@@ -59,10 +65,7 @@ const player = {
 function drawPlayer() {
 	ctx.beginPath();
 	ctx.rect(player.x, player.y, player.size, player.size);
-	// ctx.fillStyle = player.color;
-	// ctx.fill();
 	ctx.closePath();
-	
 	ctx.drawImage(book, player.x, player.y, player.size, player.size);
 }
 
@@ -89,6 +92,8 @@ function pinkBall() {
 			ctx.fillStyle = "pink";
 			ctx.fill();
 			ctx.closePath();
+
+			ctx.drawImage(letter, collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2)
 		}
 	}
 }
@@ -100,6 +105,8 @@ function blackBall() {
 		ctx.fillStyle = "black";
 		ctx.fill();
 		ctx.closePath();
+
+		ctx.drawImage(worm, uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2)
 	}
 }
 
