@@ -59,7 +59,6 @@ const player = {
 	size: 50,
 	x: (canvas.width - 50)/ 2,
 	y: canvas.height - 50,
-	color: "red"
 };
 
 function drawPlayer() {
@@ -69,7 +68,7 @@ function drawPlayer() {
 	ctx.drawImage(book, player.x, player.y, player.size, player.size);
 }
 
-// ball collection
+// collections
 const collectible = {
 	x:[],
 	y:[], 
@@ -83,7 +82,10 @@ const uncollectible = {
 	speed: 2,
 };
 
-// draw ball 
+// draw letter
+const spriteWidth = 576/4;
+const spriteHeight = 792/7;
+
 function drawLetter() {
 	for (let i = 0; i < letterCount; i++) {
 		if (collectible.state[i] === true) {		
@@ -91,11 +93,12 @@ function drawLetter() {
 			ctx.arc(collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2);
 			ctx.closePath();
 			
-			ctx.drawImage(letter, 0, 0, (576/4), (792/7), collectible.x[i] - 20, collectible.y[i] - 20, radius * 2, radius * 2)
+			ctx.drawImage(letter, 0, 0, spriteWidth, spriteHeight, collectible.x[i] - 20, collectible.y[i] - 20, radius * 2, radius * 2)
 		}
 	}
 }
 
+// draw worm
 function drawWorm() {
 	for (let i = 0; i < wormCount; i++) {
 		ctx.beginPath();
@@ -106,7 +109,7 @@ function drawWorm() {
 	}
 }
 
-// random ball generator
+// random generator
 function randomGood() {
 	if (Math.random() < 0.03) {
 		collectible.x.push(Math.random() * canvas.width);
@@ -212,7 +215,6 @@ function gameIsOver() {
 function reset() {
 	initialPlay = false;
 	gameOver = false;
-	player.color = "red";
 	level = 1;
 	score = 0;
 	lives = 3;
