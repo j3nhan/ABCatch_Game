@@ -11,7 +11,7 @@ let score = 0;
 let lives = 3;
 let level = 1;
 const radius = 20;
-let pinkCount = 0;
+let letterCount = 0;
 let blackCount = 0;
 
 const book = new Image();
@@ -85,7 +85,7 @@ const uncollectible = {
 
 // draw ball 
 function pinkBall() {
-	for (let i = 0; i < pinkCount; i++) {
+	for (let i = 0; i < letterCount; i++) {
 		if (collectible.state[i] === true) {		
 			ctx.beginPath();
 			ctx.arc(collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2);
@@ -113,7 +113,7 @@ function randomGood() {
 		collectible.y.push(0);
 		collectible.state.push(true);
 	}
-	pinkCount = collectible.x.length;
+	letterCount = collectible.x.length;
 }
 
 function randomBad() {
@@ -133,14 +133,14 @@ function game() {
 	if (rightMove && player.x + player.size < canvas.width) {
 		player.x += 7;
 	}
-	for (let i = 0; i < pinkCount; i++) {
+	for (let i = 0; i < letterCount; i++) {
 		collectible.y[i] += collectible.speed;
 	}
 	for (let i = 0; i < blackCount; i++) {
 		uncollectible.y[i] += uncollectible.speed;
 	}
 	
-	for (let i = 0; i < pinkCount; i++) {
+	for (let i = 0; i < letterCount; i++) {
 		if (collectible.state[i]) {
 			if (player.x < collectible.x[i] + radius && 
 				player.x + player.size + radius > collectible.x[i] && 
