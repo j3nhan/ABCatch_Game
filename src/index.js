@@ -196,6 +196,11 @@ function game() {
 			collectible.speed = 5;
 			uncollectible.speed = 4;
 			break;
+		case 40: 
+			level = 5;
+			collectible.speed = 6;
+			uncollectible.speed = 5;
+			break;
 	}
 }
 
