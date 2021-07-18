@@ -84,7 +84,7 @@ const uncollectible = {
 };
 
 // draw ball 
-function pinkBall() {
+function drawLetter() {
 	for (let i = 0; i < letterCount; i++) {
 		if (collectible.state[i] === true) {		
 			ctx.beginPath();
@@ -96,7 +96,7 @@ function pinkBall() {
 	}
 }
 
-function blackBall() {
+function drawWorm() {
 	for (let i = 0; i < wormCount; i++) {
 		ctx.beginPath();
 		ctx.arc(uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2);
@@ -243,8 +243,8 @@ function draw() {
 		ctx.fillText("LIVES: " + lives, 590 , 25); 
 
 		drawPlayer();
-		blackBall();
-		pinkBall();
+		drawWorm();
+		drawLetter();
 		game();
 		randomGood();
 		randomBad();
