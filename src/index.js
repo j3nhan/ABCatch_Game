@@ -89,8 +89,6 @@ function pinkBall() {
 		if (collectible.state[i] === true) {		
 			ctx.beginPath();
 			ctx.arc(collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2);
-			// ctx.fillStyle = "pink";
-			// ctx.fill();
 			ctx.closePath();
 			
 			ctx.drawImage(letter, 0, 0, (576/4), (792/7), collectible.x[i] - 20, collectible.y[i] - 20, radius * 2, radius * 2)
@@ -102,8 +100,6 @@ function blackBall() {
 	for (let i = 0; i < blackCount; i++) {
 		ctx.beginPath();
 		ctx.arc(uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2);
-		// ctx.fillStyle = "black";
-		// ctx.fill();
 		ctx.closePath();
 
 		ctx.drawImage(worm, 0, 0, 1214, 787, uncollectible.x[i] - 20, uncollectible.y[i] - 15, radius * 2, radius * 2)
