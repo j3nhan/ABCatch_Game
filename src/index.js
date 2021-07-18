@@ -93,7 +93,7 @@ function pinkBall() {
 			ctx.fill();
 			ctx.closePath();
 
-			ctx.drawImage(letter, collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2)
+			// ctx.drawImage(letter, collectible.x[i], collectible.y[i], radius, 0, Math.PI * 2)
 		}
 	}
 }
@@ -102,11 +102,11 @@ function blackBall() {
 	for (let i = 0; i < blackCount; i++) {
 		ctx.beginPath();
 		ctx.arc(uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2);
-		ctx.fillStyle = "black";
-		ctx.fill();
+		// ctx.fillStyle = "black";
+		// ctx.fill();
 		ctx.closePath();
 
-		ctx.drawImage(worm, 0, 0, 1214, 787, uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2)
+		ctx.drawImage(worm, 0, 0, 1214, 787, uncollectible.x[i] - 20, uncollectible.y[i] - 15, radius * 2, radius * 2)
 	}
 }
 
