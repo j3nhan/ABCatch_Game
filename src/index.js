@@ -12,7 +12,7 @@ let lives = 3;
 let level = 1;
 const radius = 20;
 let letterCount = 0;
-let blackCount = 0;
+let wormCount = 0;
 
 const book = new Image();
 book.src = "src/images/book.png";
@@ -97,7 +97,7 @@ function pinkBall() {
 }
 
 function blackBall() {
-	for (let i = 0; i < blackCount; i++) {
+	for (let i = 0; i < wormCount; i++) {
 		ctx.beginPath();
 		ctx.arc(uncollectible.x[i], uncollectible.y[i], radius, 0, Math.PI * 2);
 		ctx.closePath();
@@ -122,7 +122,7 @@ function randomBad() {
 			uncollectible.y.push(0);
 	}
 
-	blackCount = uncollectible.x.length;
+	wormCount = uncollectible.x.length;
 }
 
 // catch object and track score 
@@ -136,7 +136,7 @@ function game() {
 	for (let i = 0; i < letterCount; i++) {
 		collectible.y[i] += collectible.speed;
 	}
-	for (let i = 0; i < blackCount; i++) {
+	for (let i = 0; i < wormCount; i++) {
 		uncollectible.y[i] += uncollectible.speed;
 	}
 	
@@ -158,7 +158,7 @@ function game() {
 		}
 	}
 
-	for (let i = 0; i < blackCount; i++) {
+	for (let i = 0; i < wormCount; i++) {
 		if (player.x < uncollectible.x[i] + radius && 
 			player.x + player.size + radius > uncollectible.x[i] && 
 			player.y < uncollectible.y[i] + radius && 
