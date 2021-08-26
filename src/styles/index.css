@@ -14,7 +14,7 @@ body {
 .p-cont {
     position: relative;
     text-align: center;
-    margin-top: 6px;
+    margin-top: 5vh;
     font-weight: bold;
     font-family: 'Quantico', sans-serif;
 }
@@ -41,7 +41,7 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    top: 70vh;
+    top: 65vh;
 }
 
 ul li {
