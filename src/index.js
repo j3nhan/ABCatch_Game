@@ -24,35 +24,39 @@ const worm = new Image();
 worm.src = "src/images/worm.png"
 
 // keys to push
-document.addEventListener("keydown", keyPressed);
-document.addEventListener("keyup", keyReleased);
 
-function keyPressed(e) {
-    switch (e.keyCode) {
-        case 39:
-            rightMove = true;
-            break;
-        case 37:
-            leftMove = true;
-            break;
-        case 32:
-            reset();
-            break;
-        default:
-            alert("SPACEBAR to begin. LEFT and RIGHT arrow keys to move. ");
-    }
-}
+let keys = {};
+window.addEventListener("keydown",
+    function(e){
+        keys[e.code] = true;
+        switch(e.code){
+			case "ArrowLeft": 
+				leftMove = true;
+				e.preventDefault(); 
+				break;
+			case "ArrowRight":
+				rightMove = true;
+				e.preventDefault(); 
+				break;
+            case "Space": 
+				reset();
+				e.preventDefault(); 
+				break;
+            default: 
+				alert("SPACEBAR to begin. LEFT and RIGHT arrow keys to move. ");
+				e.preventDefault(); 
+				break;
+        }
+    },
+	false);
 
-function keyReleased(e) {
-    switch (e.keyCode) {
-        case 39:
-            rightMove = false;
-            break;
-        case 37:
-            leftMove = false;
-            break;
-    }
-}
+window.addEventListener("keyup",
+    function(e){
+        keys[e.code] = false;
+		rightMove = false;
+		leftMove = false;
+    },
+false);
 
 // player 
 const player = {
