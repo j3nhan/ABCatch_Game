@@ -72,14 +72,14 @@ function drawPlayer() {
 const collectible = {
 	x:[],
 	y:[], 
-	speed: 2,
+	speed: 3,
 	state: []
 };
 
 const uncollectible = {
 	x:[],
 	y:[],
-	speed: 2,
+	speed: 3,
 };
 
 // draw letter
@@ -183,21 +183,21 @@ function game() {
 	switch (score) {
 		case 10:
 			level = 2;
-			uncollectible.speed = 3;
-			collectible.speed = 3;
+			uncollectible.speed = 4;
+			collectible.speed = 4;
 			break;
 		case 20:
 			level = 3;
-			collectible.speed = 4;
+			collectible.speed = 5;
 			break;
 		case 30: 
 			level = 4;
-			collectible.speed = 5;
+			collectible.speed = 6;
 			uncollectible.speed = 4;
 			break;
 		case 40: 
 			level = 5;
-			collectible.speed = 6;
+			collectible.speed = 7;
 			uncollectible.speed = 5;
 			break;
 	}
