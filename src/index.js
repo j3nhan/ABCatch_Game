@@ -24,7 +24,6 @@ const worm = new Image();
 worm.src = "src/images/worm.png"
 
 // keys to push
-
 let keys = {};
 window.addEventListener("keydown",
     function(e){
