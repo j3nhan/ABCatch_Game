@@ -12,22 +12,31 @@
     </head>
     
     <body>
-        <div class="canvas-cont">
-            <canvas id="canvas" style="background: url('./src/images/chalkboard.jpg')"></canvas>
-        </div>
-        
-        <div class="p-cont">
-            <h2>INSTRUCTIONS: Please tap spacebar to start game. Use the left and right arrow keys to move the book to catch all the letters while avoiding the worms. Good luck!</h2>
-        </div>
+        <div class="body-container">
+            <div class="canvas-cont">
+                <canvas id="canvas" style="background: url('./src/images/chalkboard.jpg')"></canvas>
+            </div>
+            
+            <div class="p-cont">
+                <h2>INSTRUCTIONS: Please tap spacebar to start game. Use the left and right arrow keys to move the book to catch all the letters while avoiding the worms. Good luck!</h2>
+            </div>
+            
+            <!-- "Music: www.bensound.com"-->
+            <div class="music-container">
+                <audio controls loop autoplay id="music-id">
+                    <source src="bensound-littleidea.mp3" type="audio/mpeg" />
+                </audio>
+            </div>
 
-        <div class="connect-links">
-            <ul>
-                <li><a href="https://linkedin.com/in/jennynhan" target="_blank"><img src="src/images/ln-icon.png" alt="LinkedIn"></a></li>
-                <li><a href="mailto:j3nnynhan@gmail.com" target="_blank"><img src="src/images/email-icon.png" alt="Email"></a></li>
-                <li><a href="https://github.com/j3nhan" target="_blank"><img src="src/images/gh-icon.png" alt="GitHub"></a></li>
-            </ul>
-        </div>
+            <div class="connect-links">
+                <ul>
+                    <li><a href="https://linkedin.com/in/jennynhan" target="_blank"><img src="src/images/ln-icon.png" alt="LinkedIn"></a></li>
+                    <li><a href="mailto:j3nnynhan@gmail.com" target="_blank"><img src="src/images/email-icon.png" alt="Email"></a></li>
+                    <li><a href="https://github.com/j3nhan" target="_blank"><img src="src/images/gh-icon.png" alt="GitHub"></a></li>
+                </ul>
+            </div>
 
+        </div>
         <script src="./dist/main.js"></script>
     </body>
 </html>
