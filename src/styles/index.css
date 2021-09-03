@@ -6,15 +6,21 @@ body {
     -moz-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
-    margin: 6px;
     overflow-x: hidden; 
     overflow-y: auto;
 } 
 
+.body-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
 .p-cont {
     position: relative;
     text-align: center;
-    margin-top: 5vh;
+    margin-top: 2vh;
     font-weight: bold;
     font-family: 'Quantico', sans-serif;
 }
@@ -22,7 +28,7 @@ body {
 .canvas-cont {
     display: block;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 78vh;
     position: absolute;
     width: 100vw;
     height: 65vh;
@@ -41,7 +47,7 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    top: 65vh;
+    top: 66vh;
 }
 
 ul li {
@@ -49,4 +55,15 @@ ul li {
     margin: 5px;
     cursor: pointer;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.music-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0%;
+}
+
+audio {
+    width: 300px;
+    height: 30px;
 }
