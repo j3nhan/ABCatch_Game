@@ -54,7 +54,10 @@ ul li {
     display: inline-block;
     margin: 5px;
     cursor: pointer;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+ul li:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .music-container {
