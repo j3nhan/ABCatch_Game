@@ -264,7 +264,7 @@ function draw() {
 		ctx.fillText("Final Score: " + score, canvas.width/2, 260);
 		ctx.fillStyle = "black";
 		ctx.font = "bold 20px Lato";
-		ctx.fillText("Tap Spacebar to start game", canvas.width/2, 450)
+		ctx.fillText("Tap Spacebar to restart game", canvas.width/2, 450)
 	}
 
 	requestAnimationFrame(draw);
