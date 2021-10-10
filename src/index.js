@@ -42,7 +42,6 @@ window.addEventListener("keydown",
 				e.preventDefault(); 
 				break;
             default: 
-				alert("SPACEBAR to begin. LEFT and RIGHT arrow keys to move. ");
 				e.preventDefault(); 
 				break;
         }
@@ -263,6 +262,9 @@ function draw() {
 		ctx.fillStyle = "black";
 		ctx.font = "bold 30px Lato";
 		ctx.fillText("Final Score: " + score, canvas.width/2, 260);
+		ctx.fillStyle = "black";
+		ctx.font = "bold 20px Lato";
+		ctx.fillText("Tap Spacebar to restart game", canvas.width/2, 450)
 	}
 
 	requestAnimationFrame(draw);

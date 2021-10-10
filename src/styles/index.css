@@ -28,7 +28,7 @@ body {
 .canvas-cont {
     display: block;
     margin: auto;
-    margin-top: 78vh;
+    margin-top: 80vh;
     position: absolute;
     width: 100vw;
     height: 65vh;
@@ -47,7 +47,7 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    top: 66vh;
+    top: 70vh;
 }
 
 ul li {
