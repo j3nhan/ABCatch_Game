@@ -56,6 +56,17 @@ window.addEventListener("keyup",
     },
 false);
 
+document.getElementById("mutebtn").addEventListener("click", () => {
+	let audio = document.getElementById("music-id")
+	if (audio.muted) {
+		audio.muted = false;
+		document.getElementById("mutebtn").setAttribute("src", "src/images/music.png")
+	} else {
+		audio.muted = true;
+		document.getElementById("mutebtn").setAttribute("src", "src/images/mute.png")
+	}
+})
+
 // player 
 const player = {
 	size: 50,
