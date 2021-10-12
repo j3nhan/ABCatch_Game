@@ -235,7 +235,7 @@ function draw() {
 		ctx.fillText("ABCatch", canvas.width/2, 250);
 		ctx.fillStyle = "black";
 		ctx.font = "bold 20px Lato";
-		ctx.fillText("Tap Spacebar to start game", canvas.width/2, 450)
+		ctx.fillText("Tap spacebar to start game", canvas.width/2, 450);
 
 	} else if (!gameOver) {
 		ctx.fillStyle = "white";
@@ -247,6 +247,10 @@ function draw() {
 		ctx.textAlign = "right";
 		ctx.fillText("LIVES: " + lives, 590 , 25); 
 
+		document.getElementById("music-id").play();
+		document.getElementById("music-id").volume = 0.2;
+		document.getElementById("music-id").loop = true; 
+
 		drawPlayer();
 		drawWorm();
 		drawLetter();
@@ -255,6 +259,7 @@ function draw() {
 		randomBad();
 
 	} else {
+		document.getElementById("music-id").pause();
 		ctx.fillStyle = "white";
 		ctx.font = "oblique bold 80px Lato";
 		ctx.textAlign = "center";
@@ -264,11 +269,10 @@ function draw() {
 		ctx.fillText("Final Score: " + score, canvas.width/2, 260);
 		ctx.fillStyle = "black";
 		ctx.font = "bold 20px Lato";
-		ctx.fillText("Tap Spacebar to restart game", canvas.width/2, 450)
+		ctx.fillText("Tap spacebar to restart game", canvas.width/2, 450)
 	}
-
+	
 	requestAnimationFrame(draw);
 }
 
 draw();
-
