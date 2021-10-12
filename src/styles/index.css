@@ -28,12 +28,14 @@ body {
 .canvas-cont {
     display: block;
     margin: auto;
-    margin-top: 80vh;
+    margin-top: 70vh;
     position: absolute;
     width: 100vw;
     height: 65vh;
     display: flex;
     justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 canvas {
@@ -47,7 +49,7 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    top: 70vh;
+    top: 65vh;
 }
 
 ul li {
@@ -58,15 +60,4 @@ ul li {
 
 ul li:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.music-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 0%;
-}
-
-audio {
-    width: 300px;
-    height: 30px;
 }
